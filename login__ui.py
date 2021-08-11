@@ -4,6 +4,7 @@ class Ui_login_dialog(QtWidgets.QDialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.status = 0
 
     def setupUi(self, login_dialog):
         login_dialog.setObjectName("login_dialog")
@@ -23,18 +24,16 @@ class Ui_login_dialog(QtWidgets.QDialog):
         self.id_line.setGeometry(QtCore.QRect(20, 20, 181, 31))
         self.id_line.setObjectName("id_line")
 
-        # self.retranslateUi(login_dialog)
-        # QtCore.QMetaObject.connectSlotsByName(login_dialog)
+        _translate = QtCore.QCoreApplication.translate
+        login_dialog.setWindowTitle(_translate("login_dialog", "Dialog"))
+        self.login_btn.setText(_translate("login_dialog", "로그인"))
 
         self.login_btn.clicked.connect(self.login)
 
-    # def retranslateUi(self, login_dialog):
-    #     _translate = QtCore.QCoreApplication.translate
-    #     login_dialog.setWindowTitle(_translate("login_dialog", "Dialog"))
-    #     self.login_btn.setText(_translate("login_dialog", "로그인"))
-
     def login(self):
         id = self.id_line.text()
-        if id == '1':
+        pass_word = self.pass_line.text()
+        if id == '1' and pass_word == '1':
+            self.status = 1
             print("close")
             self.close()
