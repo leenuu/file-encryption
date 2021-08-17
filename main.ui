@@ -13,11 +13,11 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="pull_int">
+  <widget class="QPushButton" name="pull_btn">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>160</y>
+     <y>110</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -26,21 +26,11 @@
     <string>&lt;&lt;&lt;</string>
    </property>
   </widget>
-  <widget class="QListView" name="all_it">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>141</width>
-     <height>291</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="add_2">
+  <widget class="QPushButton" name="del_btn">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>260</y>
+     <y>220</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -49,21 +39,11 @@
     <string>del</string>
    </property>
   </widget>
-  <widget class="QListView" name="selec_it">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>40</y>
-     <width>141</width>
-     <height>291</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="push_it">
+  <widget class="QPushButton" name="push_btn">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>130</y>
+     <y>80</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -72,11 +52,11 @@
     <string>&gt;&gt;&gt;</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="add">
+  <widget class="QPushButton" name="add_btn">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>230</y>
+     <y>190</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -85,17 +65,76 @@
     <string>add</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="login">
+  <widget class="QPushButton" name="login_btn">
    <property name="geometry">
     <rect>
      <x>180</x>
-     <y>40</y>
+     <y>30</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text">
     <string>login</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="all_btn">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>141</width>
+     <height>351</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="selec_it">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>30</y>
+     <width>141</width>
+     <height>351</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="save_btn">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>330</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>save</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Refresh_btn">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>360</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>refresh</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="convert_btn">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>300</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>convert</string>
    </property>
   </widget>
  </widget>
