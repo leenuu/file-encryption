@@ -11,9 +11,11 @@ class Ui_main_widget(QtWidgets.QWidget):
         self.setupUi(self)
         self.main_pro = encryption_pro()
         self.file_list = list()
-        self.selec_list = list()
+        self.select_list = list()
         self.all_file_list = list()
         self.all_files = dict()
+
+        
 
     def setupUi(self, main_dialog):
         main_dialog.setObjectName("main_dialog")
@@ -74,18 +76,34 @@ class Ui_main_widget(QtWidgets.QWidget):
         login_form.exec_()
         if login_form.status == 1:
             print('pass')
+            self.load()
         else:
             print('closs')
 
     def load(self):
-        pass
-    
-    def save(self):
-        self.main_pro.file_list.update(self.all_files)
-        # print(self.main_pro.file_list)
-        self.main_pro.save_file_data()
+        try:
+            self.all_files.update(self.main_pro.file_list)
+            self.all_file_list.extend(list(self.all_files.keys()))
+            self.refresh()
 
-    def psuh(self):
+        except FileNotFoundError:
+            pass
+
+        except Exception as e: 
+            print(e)
+
+
+
+    def save(self):
+        try:
+            self.main_pro.file_list.update(self.all_files)
+            # print(self.main_pro.file_list)
+            self.main_pro.save_file_data()
+
+        except Exception as e: 
+            print(e)
+
+    def psuh(self):     
         try:
             selected_it_num = self.all_it.currentRow()
             selected_it_name = self.all_it.currentItem().text()
@@ -93,12 +111,12 @@ class Ui_main_widget(QtWidgets.QWidget):
             del self.file_list[self.file_list.index(selected_it_name)]
             self.select_it.clear()
 
-            self.selec_list.append(selected_it_name)
-            for it in self.selec_list:
+            self.select_list.append(selected_it_name)
+            for it in self.select_list:
                 self.select_it.addItem(it)
 
             print('---------------------------------------------------------')
-            print(f'select : {self.selec_list}')
+            print(f'select : {self.select_list}')
             print(f'file : {self.file_list}')
             print(f'all file : {self.all_file_list}')
 
@@ -110,7 +128,7 @@ class Ui_main_widget(QtWidgets.QWidget):
             selected_it_num = self.select_it.currentRow()
             selected_it_name = self.select_it.currentItem().text()
             self.select_it.takeItem(selected_it_num)
-            del self.selec_list[self.selec_list.index(selected_it_name)]
+            del self.select_list[self.select_list.index(selected_it_name)]
             self.all_it.clear()
 
             self.file_list.append(selected_it_name)
@@ -118,7 +136,7 @@ class Ui_main_widget(QtWidgets.QWidget):
                 self.all_it.addItem(it)
 
             print('---------------------------------------------------------')
-            print(f'select : {self.selec_list}')
+            print(f'select : {self.select_list}')
             print(f'file : {self.file_list}')
             print(f'all file : {self.all_file_list}')
 
@@ -142,7 +160,7 @@ class Ui_main_widget(QtWidgets.QWidget):
                     self.all_it.addItem(it)
 
             print('---------------------------------------------------------')
-            print(f'select : {self.selec_list}')
+            print(f'select : {self.select_list}')
             print(f'file : {self.file_list}')
             print(f'all file : {self.all_file_list}')
         
@@ -158,7 +176,7 @@ class Ui_main_widget(QtWidgets.QWidget):
             del self.all_file_list[self.all_file_list.index(selected_it_name)]
 
             print('---------------------------------------------------------')
-            print(f'select : {self.selec_list}')
+            print(f'select : {self.select_list}')
             print(f'file : {self.file_list}')
             print(f'all file : {self.all_file_list}')
 
@@ -172,18 +190,20 @@ class Ui_main_widget(QtWidgets.QWidget):
             for it in self.all_file_list:
                 self.all_it.addItem(it)
 
-            self.selec_list.clear()
-            self.file_list = self.all_file_list
+            self.select_list.clear()
+            self.file_list.clear()
+            self.file_list.extend(self.all_file_list)
 
             print('---------------------------------------------------------')
-            print(f'select : {self.selec_list}')
+            print(f'select : {self.select_list}')
             print(f'file : {self.file_list}')
             print(f'all file : {self.all_file_list}')
 
     def convert(self):
         try:
-            for file in self.selec_list:
+            for file in self.select_list:
                 self.main_pro.decode_cryption(file, self.all_files[file]['data'])
-
+            
+            self.refresh()
         except Exception as e: 
             print(e)

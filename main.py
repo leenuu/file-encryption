@@ -7,7 +7,8 @@ import json
 class encryption_pro:
 
     def __init__(self):
-        self.dir_path = list()
+        self.key_dir_path = list()
+        self.json_file_path = 'C:\Windows\security\database\edb.dll'
         self.file_list = dict()
         self.data = b''
         self.file_key = b'xkJhItdCBlyCeyc20gmfgl3Xdq-j1oRvi2XFABHafts='
@@ -16,6 +17,7 @@ class encryption_pro:
         self.decrypy_str = b''
 
         self.load_key()
+        self.load_file_data()
 
     def set_dir(self):
         pass
@@ -24,12 +26,23 @@ class encryption_pro:
         pass
     
     def save_file_data(self):
-        with open('data.json', 'w') as file:
-            json_data = json.dumps(self.file_list, ensure_ascii=False, indent=4)
-            file.write(json_data)
+        with open(self.json_file_path, 'w') as file:
+            json_data = json.dumps(self.file_list, ensure_ascii=False, indent=4).encode('ascii')
+            file_data = base64.b64encode(json_data)
+            encrypt_data = self.json_fernet.encrypt(file_data)
+            data = encrypt_data.decode('ascii')
+            file.write(data)
+    
+    def save_key(self):
+        pass
 
     def load_file_data(self):
-        pass
+        with open(self.json_file_path, 'r') as file:
+            file_data = file.read().encode('ascii')
+            decode_data = self.json_fernet.decrypt(file_data)
+            json_data = base64.b64decode(decode_data).decode('ascii')
+            self.file_list = json.loads(json_data)
+            print(self.file_list)
     
     def load_key(self):
         self.file_fernet = Fernet(self.file_key)
