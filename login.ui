@@ -6,29 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>431</width>
+    <width>332</width>
     <height>113</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLabel" name="status">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>20</y>
-     <width>81</width>
-     <height>71</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QPushButton" name="login_brt">
    <property name="geometry">
     <rect>

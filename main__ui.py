@@ -60,6 +60,8 @@ class Ui_main_widget(QtWidgets.QWidget):
         self.save_btn.clicked.connect(self.save)
         self.convert_btn.clicked.connect(self.convert)
 
+        self.btns_disabled(True)
+
         _translate = QtCore.QCoreApplication.translate
         main_dialog.setWindowTitle(_translate("main_dialog", "Dialog"))
         self.pull_btn.setText(_translate("main_dialog","<<<"))
@@ -76,9 +78,19 @@ class Ui_main_widget(QtWidgets.QWidget):
         login_form.exec_()
         if login_form.status == 1:
             print('pass')
+            self.btns_disabled(False)
             self.load()
         else:
             print('closs')
+
+    def btns_disabled(self, status):
+        self.add_btn.setDisabled(status)
+        self.del_btn.setDisabled(status)
+        self.pull_btn.setDisabled(status)
+        self.push_btn.setDisabled(status)
+        self.refresh_btn.setDisabled(status)
+        self.save_btn.setDisabled(status)
+        self.convert_btn.setDisabled(status)
 
     def load(self):
         try:
