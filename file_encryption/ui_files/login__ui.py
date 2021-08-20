@@ -1,5 +1,5 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-from status__ui import *
+from PyQt5 import QtCore, QtWidgets
+from . import status__ui
 
 class Ui_login_dialog(QtWidgets.QDialog):
     def __init__(self):
@@ -23,22 +23,21 @@ class Ui_login_dialog(QtWidgets.QDialog):
         self.login_btn.clicked.connect(self.login)
 
         _translate = QtCore.QCoreApplication.translate
-        login_dialog.setWindowTitle(_translate("login_dialog", "Dialog"))
-        self.login_btn.setText(_translate("login_dialog", "로그인"))
+        login_dialog.setWindowTitle(_translate("login_dialog", "Login"))
+        self.login_btn.setText(_translate("login_dialog", "Login"))
 
     def login(self):
         _translate = QtCore.QCoreApplication.translate
         id = self.id_line.text()
         pass_word = self.pass_line.text()
         if id == '1' and pass_word == '1':
-            ok = Ui_ok_Dialog()
+            ok = status__ui.Ui_ok_Dialog()
             ok.exec_()
             self.status = 1
             print("close")
             self.close()
 
         else:
-            self.status_line.setText(_translate("login_dialog", "faill"))
-            fail = Ui_fail_Dialog()
+            fail = status__ui.Ui_fail_Dialog()
             fail.exec_()
 

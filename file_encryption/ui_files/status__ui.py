@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 
 class Ui_ok_Dialog(QtWidgets.QDialog):
     def __init__(self):
@@ -20,7 +20,7 @@ class Ui_ok_Dialog(QtWidgets.QDialog):
         self.ok_btn.clicked.connect(self.ok)
 
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Login Completed"))
         self.ok_btn.setText(_translate("Dialog", "ok"))
         self.status_line.setText(_translate("Dialog", "Login Completed"))
 
@@ -47,7 +47,7 @@ class Ui_fail_Dialog(QtWidgets.QDialog):
         self.ok_btn.clicked.connect(self.ok)
 
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Login Failed"))
         self.ok_btn.setText(_translate("Dialog", "ok"))
         self.status_line.setText(_translate("Dialog", "Login Failed"))
 

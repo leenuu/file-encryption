@@ -1,21 +1,17 @@
-from os import error
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.sip import delete
-from login__ui import Ui_login_dialog
-from main import encryption_pro
-import base64
+# from os import error
+from file_encryption.main import encryption_process
+from PyQt5 import QtCore, QtWidgets
+from . import login__ui
 
 class Ui_main_widget(QtWidgets.QWidget):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.main_pro = encryption_pro()
+        self.main_pro = encryption_process.encryption_pro()
         self.file_list = list()
         self.select_list = list()
         self.all_file_list = list()
         self.all_files = dict()
-
-        
 
     def setupUi(self, main_dialog):
         main_dialog.setObjectName("main_dialog")
@@ -63,7 +59,7 @@ class Ui_main_widget(QtWidgets.QWidget):
         self.btns_disabled(True)
 
         _translate = QtCore.QCoreApplication.translate
-        main_dialog.setWindowTitle(_translate("main_dialog", "Dialog"))
+        main_dialog.setWindowTitle(_translate("main_dialog", "File Encryption"))
         self.pull_btn.setText(_translate("main_dialog","<<<"))
         self.del_btn.setText(_translate("main_dialog", "del"))
         self.push_btn.setText(_translate("main_dialog", ">>>"))
@@ -74,7 +70,7 @@ class Ui_main_widget(QtWidgets.QWidget):
         self.convert_btn.setText(_translate("main_dialog", "convert"))
 
     def login(self):
-        login_form = Ui_login_dialog()
+        login_form = login__ui.Ui_login_dialog()
         login_form.exec_()
         if login_form.status == 1:
             print('pass')
@@ -84,6 +80,10 @@ class Ui_main_widget(QtWidgets.QWidget):
             print('closs')
 
     def btns_disabled(self, status):
+        if status == True:
+            self.login_btn.setDisabled(False)
+        else:
+            self.login_btn.setDisabled(True)
         self.add_btn.setDisabled(status)
         self.del_btn.setDisabled(status)
         self.pull_btn.setDisabled(status)
@@ -94,6 +94,8 @@ class Ui_main_widget(QtWidgets.QWidget):
 
     def load(self):
         try:
+            self.main_pro.load_key()
+            self.main_pro.load_file_data()
             self.all_files.update(self.main_pro.file_list)
             self.all_file_list.extend(list(self.all_files.keys()))
             self.refresh()
@@ -103,8 +105,6 @@ class Ui_main_widget(QtWidgets.QWidget):
 
         except Exception as e: 
             print(e)
-
-
 
     def save(self):
         try:
