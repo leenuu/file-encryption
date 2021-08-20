@@ -1,3 +1,3 @@
-from status__ui import Ui_ok_Dialog, Ui_fail_Dialog
-from login__ui import Ui_login_dialog
-from main__ui import Ui_main_widget
+from . import status__ui
+from . import login__ui
+from . import main__ui
