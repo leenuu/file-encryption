@@ -16,9 +16,6 @@ class encryption_pro:
         self.encrypy_str = b''
         self.decrypy_str = b''
 
-        self.load_key()
-        self.load_file_data()
-
     def set_dir(self):
         pass
 
