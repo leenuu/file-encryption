@@ -1,10 +1,10 @@
-import ui_files
-from PyQt5 import QtCore, QtGui, QtWidgets
+from file_encryption.ui_files.main__ui import Ui_main_widget
+from PyQt5 import QtWidgets
 import sys
-import os
 # import win32com.shell.shell as shell
 
 if __name__ == "__main__":
+    # pass
     # ASADMIN = 'asadmin'
     # if sys.argv[-1] != ASADMIN:
     #     script = os.path.abspath(sys.argv[0])
@@ -13,6 +13,6 @@ if __name__ == "__main__":
     #     sys.exit(0)
         
     app = QtWidgets.QApplication(sys.argv)
-    ui = ui_files.Ui_main_widget()
+    ui = Ui_main_widget()
     ui.show()
     sys.exit(app.exec_())   
