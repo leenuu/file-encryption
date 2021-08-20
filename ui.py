@@ -1,4 +1,4 @@
-from main__ui import Ui_main_widget
+import ui_files
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import os
@@ -13,6 +13,6 @@ if __name__ == "__main__":
     #     sys.exit(0)
         
     app = QtWidgets.QApplication(sys.argv)
-    ui = Ui_main_widget()
+    ui = ui_files.Ui_main_widget()
     ui.show()
     sys.exit(app.exec_())   
