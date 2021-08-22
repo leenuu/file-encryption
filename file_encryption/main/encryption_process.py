@@ -8,26 +8,38 @@ class encryption_pro:
 
     def __init__(self):
         self.key_dir_path = list()
-        self.json_file_path = 'C:\Windows\security\database\edb.dll'
+        self.json_file_path = '' #path you want
         self.file_list = dict()
         self.data = b''
-        self.file_key = b'xkJhItdCBlyCeyc20gmfgl3Xdq-j1oRvi2XFABHafts='
-        self.json_key = b'kds2SWt2Hc6Sd9rb9rsnc0W__r2v3ZPPPMqviA1Fvn4='
-        self.encrypy_str = b''
-        self.decrypy_str = b''
+        self.file_key = b''
+        self.json_key = b''
+        self.login_str = b'404_not_found'
+        self.login_key_str = b''
 
-    def set_dir(self):
-        pass
+    def login(self, path):
+        with open(path, 'r') as key_file:
+            data = key_file.read().split(',')
+            login_fernet = Fernet(data[0].encode('ascii'))
+            key = data[2].encode('ascii')
+            print(data) 
 
-    def edit_list(self):
-        pass
-    
+        if self.login_str == login_fernet.decrypt(key):
+            self.json_key = data[0].encode('ascii')
+            self.file_key = data[1].encode('ascii')
+            self.login_key_str = key
+            self.load_key()
+            return 0
+
+        else:
+            return 1
+            
     def save_file_data(self):
         with open(self.json_file_path, 'w') as file:
             json_data = json.dumps(self.file_list, ensure_ascii=False, indent=4).encode('ascii')
             file_data = base64.b64encode(json_data)
             encrypt_data = self.json_fernet.encrypt(file_data)
             data = encrypt_data.decode('ascii')
+            
             file.write(data)
     
     def save_key(self):
