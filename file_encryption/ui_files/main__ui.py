@@ -1,7 +1,6 @@
-# from os import error
 from file_encryption.main import encryption_process
 from PyQt5 import QtCore, QtWidgets
-from . import login__ui
+from . import status__ui
 
 class Ui_main_widget(QtWidgets.QWidget):
     def __init__(self):
@@ -70,14 +69,17 @@ class Ui_main_widget(QtWidgets.QWidget):
         self.convert_btn.setText(_translate("main_dialog", "convert"))
 
     def login(self):
-        login_form = login__ui.Ui_login_dialog()
-        login_form.exec_()
-        if login_form.status == 1:
-            print('pass')
+        key_file = QtWidgets.QFileDialog.getOpenFileName(self, 'Open File')
+        key_file_path = key_file[0]
+        
+        if self.main_pro.login(key_file_path) == 0:
+            ok = status__ui.Ui_ok_Dialog()
+            ok.exec_()
             self.btns_disabled(False)
-            self.load()
+        
         else:
-            print('closs')
+            ok = status__ui.Ui_fail_Dialog()
+            ok.exec_()
 
     def btns_disabled(self, status):
         if status == True:
