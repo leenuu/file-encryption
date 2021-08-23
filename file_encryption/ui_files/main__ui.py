@@ -1,6 +1,7 @@
 from file_encryption.main import encryption_process
 from PyQt5 import QtCore, QtWidgets
 from . import status__ui
+import os
 
 class Ui_main_widget(QtWidgets.QWidget):
     def __init__(self):
@@ -73,12 +74,13 @@ class Ui_main_widget(QtWidgets.QWidget):
         key_file_path = key_file[0]
         
         if self.main_pro.login(key_file_path) == 0:
-            ok = status__ui.Ui_ok_Dialog()
+            ok = status__ui.Ui_status_Dialog("Success", "Login Complete")
             ok.exec_()
             self.btns_disabled(False)
+            self.load()
         
         else:
-            ok = status__ui.Ui_fail_Dialog()
+            ok = status__ui.Ui_status_Dialog("Fail", "Login Fail")
             ok.exec_()
 
     def btns_disabled(self, status):
@@ -103,19 +105,24 @@ class Ui_main_widget(QtWidgets.QWidget):
             self.refresh()
 
         except FileNotFoundError:
-            pass
+            ok = status__ui.Ui_status_Dialog("Fail", "File Load Fail")
+            ok.exec_()
 
         except Exception as e: 
-            print(e)
+            ok = status__ui.Ui_status_Dialog("Error", str(e))
+            ok.exec_()
 
     def save(self):
         try:
             self.main_pro.file_list.update(self.all_files)
             # print(self.main_pro.file_list)
             self.main_pro.save_file_data()
+            ok = status__ui.Ui_status_Dialog("Success", "Save Complete")
+            ok.exec_()          
 
         except Exception as e: 
-            print(e)
+            ok = status__ui.Ui_status_Dialog("Error", "Save Fail\n" + str(e))
+            ok.exec_()
 
     def psuh(self):     
         try:
@@ -173,6 +180,8 @@ class Ui_main_widget(QtWidgets.QWidget):
                 for it in self.file_list:
                     self.all_it.addItem(it)
 
+            os.remove(files_path[0])
+
             print('---------------------------------------------------------')
             print(f'select : {self.select_list}')
             print(f'file : {self.file_list}')
@@ -219,5 +228,8 @@ class Ui_main_widget(QtWidgets.QWidget):
                 self.main_pro.decode_cryption(file, self.all_files[file]['data'])
             
             self.refresh()
+            ok = status__ui.Ui_status_Dialog("Success", "Convert Complete")
+            ok.exec_()  
+            
         except Exception as e: 
             print(e)
