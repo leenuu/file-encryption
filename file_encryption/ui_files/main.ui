@@ -78,7 +78,7 @@
     <string>login</string>
    </property>
   </widget>
-  <widget class="QListWidget" name="all_btn">
+  <widget class="QListWidget" name="all_it">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -88,7 +88,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QListWidget" name="selec_it">
+  <widget class="QListWidget" name="select_it">
    <property name="geometry">
     <rect>
      <x>280</x>
